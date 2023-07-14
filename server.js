@@ -11,28 +11,28 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
 
-// Create a MySQL connection
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'chatapp'
-});
-
-// Connect to the MySQL database
-connection.connect((err) => {
-    if (err) {
-        console.error('Error connecting to the database:', err);
-    } else {
-        console.log('Connected to the database');
-    }
-});
-
-// Close the MySQL connection when the server is stopped
-process.on('SIGINT', () => {
-    connection.end();
-    process.exit();
-});
+// // Create a MySQL connection
+// const connection = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     password: '',
+//     database: 'chatapp'
+// });
+//
+// // Connect to the MySQL database
+// connection.connect((err) => {
+//     if (err) {
+//         console.error('Error connecting to the database:', err);
+//     } else {
+//         console.log('Connected to the database');
+//     }
+// });
+//
+// // Close the MySQL connection when the server is stopped
+// process.on('SIGINT', () => {
+//     connection.end();
+//     process.exit();
+// });
 
 // Set public path
 app.use(express.static(path.join(__dirname, 'public')))
