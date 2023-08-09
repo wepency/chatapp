@@ -26,34 +26,10 @@ const io = new Server(server, {
 })
 
 app.get('/chat/:param1?/:param2?', (req, res) => {
-    return res.sendFile(path.join(__dirname, '../chat/index.html'));
+    return res.sendFile(path.join(__dirname, '../chat/build/index.html'));
 });
 
 app.use('/api', apiRouter)
-
-// app.get('/api/chats', async (req, res) => {
-
-//     console.log(server_api);
-
-//     try {
-//     const response = await axios.get(server_api+'/chats', {
-//         headers: {
-//             // withCredentials: true,
-//             Authorization: `${req.get('Authorization')}`, // Attach the bearer token in the request headers
-//         },
-//     });
-
-//     // Extract the JSON data from the response
-//     const data = response.data;
-
-//     // Send the JSON data back to the client
-//     res.json(data);
-
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// });
 
 io.on("connection", (socket) => {
 
