@@ -8,6 +8,7 @@ import { NavLink } from 'react-router-dom';
 import {APP_MAIN_PATH} from '../config'
 
 export default function ChatHeader({ userData, token }) {
+
   return (
     <div className="chat-header online bar">
 
@@ -37,4 +38,5 @@ export default function ChatHeader({ userData, token }) {
 
     </div>
   )
+  
 }

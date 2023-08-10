@@ -76,7 +76,7 @@ const ChatPage = React.memo(({ socket }) => {
   }, [bearerToken])
   
   return(
-    <div className="center">
+    <div className="center no-scroll">
       <div className="chat">
 
         <ChatHeader userData={userData} token={bearerToken} />
@@ -91,19 +91,21 @@ const ChatPage = React.memo(({ socket }) => {
           setIsOtherUserTyping={setIsOtherUserTyping} 
         />
 
-        <ChatShortMessages token={bearerToken} />
+        <footer>
+          <ChatShortMessages className={shortMessage.length === 0 ? 'hide' : ''} token={bearerToken} />
 
-        <ChatFooter socket={socket} 
-          messageList={messageList} 
-          setMessageList={setMessageList} 
-          isTyping={isTyping} 
-          setIsTyping={setIsTyping} 
-          handleTyping={handleTyping} 
-          isOtherUserTyping={isOtherUserTyping} 
-          setIsOtherUserTyping={setIsOtherUserTyping}
-          token={bearerToken}
-        />
-
+          <ChatFooter socket={socket} 
+            messageList={messageList} 
+            setMessageList={setMessageList} 
+            isTyping={isTyping} 
+            setIsTyping={setIsTyping} 
+            handleTyping={handleTyping} 
+            isOtherUserTyping={isOtherUserTyping} 
+            setIsOtherUserTyping={setIsOtherUserTyping}
+            token={bearerToken}
+          />
+        </footer>
+        
       </div>
     </div>
   )

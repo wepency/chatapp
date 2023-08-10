@@ -24,7 +24,7 @@ function App() {
   // }
 
   return (
-    <div className="App">
+    <div style={{direction:'rtl'}} className="App">
 
       {/* <h3>Join A Chat</h3>
 

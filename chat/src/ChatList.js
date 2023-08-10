@@ -21,9 +21,11 @@ export default function ChatList({ socket }) {
 
         <ChatListHeader />
 
-        <ChatListSearch />
+        <div className="chat-list__header">
+          <ChatListSearch />
 
-        <ChatListStatics statics={statics} />
+          <ChatListStatics statics={statics} />
+        </div>
 
         <ChatListContacts socket={socket} token={bearerToken} contacts={contacts} setContacts={setContacts} setStatics={setStatics} />
 

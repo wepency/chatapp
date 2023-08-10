@@ -29,7 +29,7 @@ app.get('/chat/:param1?/:param2?', (req, res) => {
     return res.sendFile(path.join(__dirname, '../chat/build/index.html'));
 });
 
-app.use('/api', apiRouter)
+app.use('/api', apiRouter);
 
 io.on("connection", (socket) => {
 

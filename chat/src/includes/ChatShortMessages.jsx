@@ -25,7 +25,7 @@ export default function ChatShortMessages({ token }) {
     }, [])
 
   return (
-    <div id='short-messages-container'>
+    <div id='short-messages-container' className={shortMessages.length === 0 ? 'hide-tab' : ''}>
         <ul class="scrollable-list">
             {shortMessages.map((message) => {
               return (<li class="item">{message.title}</li>)
