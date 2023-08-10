@@ -92,7 +92,7 @@ const ChatPage = React.memo(({ socket }) => {
         />
 
         <footer>
-          <ChatShortMessages className={shortMessage.length === 0 ? 'hide' : ''} token={bearerToken} />
+          <ChatShortMessages token={bearerToken} />
 
           <ChatFooter socket={socket} 
             messageList={messageList} 
