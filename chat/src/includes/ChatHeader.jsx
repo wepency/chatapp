@@ -18,7 +18,7 @@ export default function ChatHeader({ userData, token }) {
 
       <div className='right-side'>
 
-      {JSON.parse(backBtn) !== false && (<NavLink to={`${APP_MAIN_PATH}/?token=${token}`}>
+      {JSON.parse(backBtn) === false ? (<div style={{width: '50px'}} className='go-back'></div>) : (<NavLink to={`${APP_MAIN_PATH}/?token=${token}`}>
         <FaAngleRight className='go-back' />
       </NavLink>)}
       
