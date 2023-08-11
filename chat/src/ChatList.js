@@ -22,7 +22,7 @@ export default function ChatList({ socket }) {
         <ChatListHeader />
 
         <div className="chat-list__header">
-          <ChatListSearch />
+          <ChatListSearch setContacts={setContacts} />
 
           <ChatListStatics statics={statics} />
         </div>

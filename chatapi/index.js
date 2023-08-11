@@ -35,7 +35,6 @@ app.use('/api', apiRouter);
 
 io.on("connection", (socket) => {
 
-
     // Handle the "user_login" event to associate user ID with socket ID
     socket.on('user_login', (userId) => {
       connectedUsers.set(userId, socket.id);
@@ -43,16 +42,7 @@ io.on("connection", (socket) => {
 
     socket.on("send_message", (data) => {
         socket.to(data.room).emit('receive_message', data)
-
         socket.broadcast.emit('refresh_contacts', data)
-        
-        // // Get the socket ID of the specific user from the connectedUsers map
-        // const receiverSocketId = connectedUsers.get(receiverId);
-
-        // if (receiverSocketId) {
-        //   // Emit the "new_message" event to the specific user's socket ID
-        //   io.to(receiverSocketId).emit('new_message', { senderId: socket.id, message });
-        // }
     })
 
     socket.on('typing', (isTyping, room) => {

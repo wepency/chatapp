@@ -1,16 +1,15 @@
-import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
 import {Axios} from '../config';
 import { BsSend } from 'react-icons/bs';
+import { format } from 'date-fns';
 
-export default function ChatFooter({ socket, messageList, setMessageList, isTyping, setIsTyping, handleTyping, isOtherUserTyping, setIsOtherUserTyping, token }) {
+export default function ChatFooter({ socket, messageList, setMessageList, setIsTyping, handleTyping, isOtherUserTyping, setIsOtherUserTyping, currentMessage, setCurrentMessage, token }) {
 
-  const [currentMessage, setCurentMessage] = useState("");
   const {chatId} = useParams();
 
   const handleKeyPress = async (event) => {
     if(event.keyCode === 13 || event.key === 'Enter') {
-      sendMessage();
+      sendMessage(event);
     }
   }
 
@@ -18,10 +17,12 @@ export default function ChatFooter({ socket, messageList, setMessageList, isTypi
     if(currentMessage !== "") {
       const messageData = {
         message: currentMessage,
+        userId: socket.id,
         room: chatId,
         isMe: true,
         receiverId: 8,
-        time: new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes()
+        time: new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes(),
+        date: format(new Date(Date.now()), 'dd/MM/yyyy')
       }
 
       await socket.emit("send_message", messageData);
@@ -35,7 +36,7 @@ export default function ChatFooter({ socket, messageList, setMessageList, isTypi
         },
       })
 
-      setCurentMessage('');
+      setCurrentMessage('');
     }
   }
 
@@ -50,7 +51,7 @@ export default function ChatFooter({ socket, messageList, setMessageList, isTypi
         value={currentMessage}
 
         onChange={(event) => {
-          setCurentMessage(event.target.value);
+          setCurrentMessage(event.target.value);
           handleTyping(event);
           // Add more method calls as needed
         }}

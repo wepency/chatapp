@@ -1,7 +1,8 @@
 import {Axios, AxiosClear} from '../config';
 import React, { useEffect, useState } from 'react'
 
-export default function ChatShortMessages({ token }) {
+export default function ChatShortMessages({ setCurrentMessage, token }) {
+
   const [shortMessages, setShortMessages] = useState([]);
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function ChatShortMessages({ token }) {
     <div id='short-messages-container' className={shortMessages.length === 0 ? 'hide-tab' : ''}>
         <ul class="scrollable-list">
             {shortMessages.map((message) => {
-              return (<li class="item">{message.title}</li>)
+              return (<li onClick={() => {setCurrentMessage(message.message)}} class="item">{message.title}</li>)
             })}
         </ul>
     </div>

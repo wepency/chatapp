@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react'
 import { useParams } from 'react-router-dom';
+import Logo from '../assets/images/image.png'
 
-export default function ChatBody({socket, messageList, setMessageList, isTyping, setIsTyping, handleTyping, isOtherUserTyping, setIsOtherUserTyping}) {
+export default function ChatBody({socket, messageList, setMessageList, userData, isOtherUserTyping, setIsOtherUserTyping}) {
 
     const chatRef = useRef(null);
     const {chatId} = useParams();
@@ -49,42 +50,60 @@ export default function ChatBody({socket, messageList, setMessageList, isTyping,
     <div className="messages" id="chat" ref={chatRef}>
 
       <div className="messages-group-date">
-        Today at 11:41
+        {userData.created_at}
       </div>
 
-      {/* <div className="message parker">
-        Hey, man! What's up, Mr Stark? 👋
-      </div>
-      <div className="message parker">
-        Hey, man! What's up, Mr Stark? 👋
-      </div>
-      <div className="message parker">
-        Hey, man! What's up, Mr Stark? 👋
-      </div>
-      <div class="message parker">
-        Hey, man! What's up, Mr Stark? 👋
-      </div>
-      <div class="message stark">
-        Kid, where'd you come from? 
-      </div>
-      <div class="message parker">
-        Field trip! 🤣
+      <div className='main-alert-message' style={{marginBottom: '1rem'}}>
+
+        <span className='alert-logo'>
+          <img src={Logo} />
+        </span>
+
+        <p style={{padding: '1rem', margin: 0}}>رقم التواصل مع المضيف سيظهر مباشرة بعد الحجز. لا تحرج المضيف وتطلب منه التواصل خارج المنصة ، حيث ان ذلك سيتسبب بإيقاف حسابه ويلغي ضمان حقك.</p>
+      
       </div>
 
-      <div class="message parker">
-        Uh, what is this guy's problem, Mr. Stark? 🤔
-      </div>
+      {messageList.map((messageContent, index) => {
 
-      <div class="message stark">
-        Uh, he's from space, he came here to steal a necklace from a wizard.
-      </div> */}
+        const prevMessage = index > 0 ? messageList[index - 1] : null;
+        const isNewDay = prevMessage ? (messageContent.date !== prevMessage.date) : true;
+        const username = messageContent.isMe ? 'أنا' : userData.name;
 
-      {messageList.map((messageContent) => {
-        return (<div className={`message ${messageContent.isMe ? 'parker' : 'stark'}`}>
-          {messageContent.message}
+        const isFirstMessage = index === 0 || (index > 0 ? prevMessage.userId !== messageContent.userId : true) || isNewDay;
+      
+        return (
+          <>
+            {isNewDay && (
+                <div className='messages-group-date'>
+                  {messageContent.date}
+                </div>
+              )}
 
-          <div className='time'>{messageContent.time}</div>
-          </div>)
+            <div key={index} className={`message-wrapper ${messageContent.isMe ? 'me' : 'another'} ${isFirstMessage ? 'first-message' : 'sequence-message'}`}>
+
+            {isFirstMessage && (<div className='username'>
+              <span>{username}</span>
+            </div>)}
+
+            <div className='message-container'>
+
+              {!messageContent.isMe && (<div className='user-pic'>
+                {isFirstMessage && <img src={userData.avatar} />}
+              </div>)}
+
+              <div className={`message ${messageContent.isMe ? 'parker' : 'stark'}`}>
+              
+                {messageContent.message}
+
+                <div className='time'>{messageContent.time}</div>
+
+              </div>
+
+            </div>
+
+            </div>
+          </>
+        )
       })}
 
       {isOtherUserTyping && <div class="message stark">
@@ -92,12 +111,6 @@ export default function ChatBody({socket, messageList, setMessageList, isTyping,
         <div class="typing typing-2"></div>
         <div class="typing typing-3"></div>
       </div>}
-
-      {/* <div class="message stark">
-        <div class="typing typing-1"></div>
-        <div class="typing typing-2"></div>
-        <div class="typing typing-3"></div>
-      </div> */}
 
     </div>
   )

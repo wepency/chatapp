@@ -19,6 +19,7 @@ const ChatPage = React.memo(({ socket }) => {
   const [isTyping, setIsTyping] = useState(false);
   const [isOtherUserTyping, setIsOtherUserTyping] = useState(false);
 
+  const [currentMessage, setCurrentMessage] = useState("");
   const [shortMessage, setShortMessage] = useState('');
 
   const handleTyping = () => {
@@ -57,6 +58,7 @@ const ChatPage = React.memo(({ socket }) => {
         return {
           message: message.message,
           room: message.chat_id,
+          userId: message.user_id,
           time: message.sent_at,
           date: message.date,
           isMe: message.is_me,
@@ -83,6 +85,7 @@ const ChatPage = React.memo(({ socket }) => {
 
         <ChatBody socket={socket} 
           messageList={messageList} 
+          userData={userData}
           setMessageList={setMessageList} 
           isTyping={isTyping} 
           setIsTyping={setIsTyping} 
@@ -92,12 +95,16 @@ const ChatPage = React.memo(({ socket }) => {
         />
 
         <footer>
-          <ChatShortMessages token={bearerToken} />
+          <ChatShortMessages token={bearerToken}
+            setCurrentMessage={setCurrentMessage}
+          />
 
           <ChatFooter socket={socket} 
+            currentMessage={currentMessage}
+            setCurrentMessage={setCurrentMessage}
             messageList={messageList} 
             setMessageList={setMessageList} 
-            isTyping={isTyping} 
+            isTyping={isTyping}
             setIsTyping={setIsTyping} 
             handleTyping={handleTyping} 
             isOtherUserTyping={isOtherUserTyping} 
