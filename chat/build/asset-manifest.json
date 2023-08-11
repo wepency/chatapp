@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "https://aqarbooking.com/chat/build/static/css/main.1ae9a948.css",
-    "main.js": "https://aqarbooking.com/chat/build/static/js/main.4d4688bc.js",
+    "main.js": "https://aqarbooking.com/chat/build/static/js/main.4e4464b9.js",
     "static/js/787.c4e7f8f9.chunk.js": "https://aqarbooking.com/chat/build/static/js/787.c4e7f8f9.chunk.js",
     "index.html": "https://aqarbooking.com/chat/build/index.html",
     "main.1ae9a948.css.map": "https://aqarbooking.com/chat/build/static/css/main.1ae9a948.css.map",
-    "main.4d4688bc.js.map": "https://aqarbooking.com/chat/build/static/js/main.4d4688bc.js.map",
+    "main.4e4464b9.js.map": "https://aqarbooking.com/chat/build/static/js/main.4e4464b9.js.map",
     "787.c4e7f8f9.chunk.js.map": "https://aqarbooking.com/chat/build/static/js/787.c4e7f8f9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1ae9a948.css",
-    "static/js/main.4d4688bc.js"
+    "static/js/main.4e4464b9.js"
   ]
 }
