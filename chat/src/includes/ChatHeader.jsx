@@ -4,19 +4,23 @@ import { FaAngleRight } from 'react-icons/fa';
 import { BsThreeDots } from 'react-icons/bs';
 
 import { NavLink } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 import {APP_MAIN_PATH} from '../config'
 
 export default function ChatHeader({ userData, token }) {
+
+  const [searchParams] = useSearchParams();
+  const backBtn = searchParams.get('backBtn')
 
   return (
     <div className="chat-header online bar">
 
       <div className='right-side'>
 
-      <NavLink to={`${APP_MAIN_PATH}/?token=${token}`}>
+      {JSON.parse(backBtn) !== false && (<NavLink to={`${APP_MAIN_PATH}/?token=${token}`}>
         <FaAngleRight className='go-back' />
-      </NavLink>
+      </NavLink>)}
       
         <div className="pic" style={{backgroundImage: `url(${userData.avatar})`}}></div>
 
