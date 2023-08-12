@@ -31,11 +31,13 @@ const ChatPage = React.memo(({ socket }) => {
   const bearerToken = searchParams.get('token');
 
   const [keyboardHeight, setKeyboardHeight] = useState(0);
+  const [scrollToBottom, setScrollToBottom] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
       const newKeyboardHeight = window.visualViewport.height - window.innerHeight;
       setKeyboardHeight(newKeyboardHeight);
+      setScrollToBottom(true)
     };
 
     window.addEventListener('resize', handleResize);
@@ -107,6 +109,8 @@ const ChatPage = React.memo(({ socket }) => {
           handleTyping={handleTyping} 
           isOtherUserTyping={isOtherUserTyping} 
           setIsOtherUserTyping={setIsOtherUserTyping} 
+          scrollToBottom={scrollToBottom}
+          setScrollToBottom={setScrollToBottom}
         />
 
         <footer>

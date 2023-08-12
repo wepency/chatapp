@@ -2,14 +2,14 @@ import React, { useEffect, useRef } from 'react'
 import { useParams } from 'react-router-dom';
 import Logo from '../assets/images/image.png'
 
-export default function ChatBody({socket, messageList, setMessageList, userData, isOtherUserTyping, setIsOtherUserTyping}) {
+export default function ChatBody({socket, messageList, setScrollToBottom, scrollToBottom, setMessageList, userData, isOtherUserTyping, setIsOtherUserTyping}) {
 
     const chatRef = useRef(null);
     const {chatId} = useParams();
 
   // Function to scroll the chat div to the bottom
   const scrollChatToBottom = () => {
-    if (chatRef.current) {
+    if (chatRef.current || scrollToBottom) {
       chatRef.current.scrollTop = chatRef.current.scrollHeight;
     }
   };
@@ -17,7 +17,7 @@ export default function ChatBody({socket, messageList, setMessageList, userData,
   // Call the scrollChatToBottom function after the component renders or updates
   useEffect(() => {
     scrollChatToBottom();
-  });
+  }, [scrollToBottom, []]);
 
   useEffect(() => {
     
