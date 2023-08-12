@@ -59,6 +59,12 @@ body, html {
   /* color: #fff; */
   font-size: 26px;
 }
+
+.btn.btn-rounded svg {
+  width: 26px;
+  height: 26px;
+}
+
 .statics-label {
   font-weight: 400 !important;
   color: #a9a9a9;
