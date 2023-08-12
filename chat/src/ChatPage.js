@@ -30,6 +30,21 @@ const ChatPage = React.memo(({ socket }) => {
 
   const bearerToken = searchParams.get('token');
 
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const newKeyboardHeight = window.visualViewport.height - window.innerHeight;
+      setKeyboardHeight(newKeyboardHeight);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   useEffect(() => {
     // Join the room when the component mounts
     socket.emit('join_room', chatId);
@@ -78,7 +93,7 @@ const ChatPage = React.memo(({ socket }) => {
   }, [bearerToken])
   
   return(
-    <div className="center no-scroll">
+    <div className="center no-scroll" style={{ paddingBottom: `${keyboardHeight}px` }}>
       <div className="chat">
 
         <ChatHeader userData={userData} token={bearerToken} />
