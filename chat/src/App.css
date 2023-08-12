@@ -57,7 +57,7 @@ body, html {
   height: 50px;
   border-radius: 50px;
   /* color: #fff; */
-  /* font-size: 26px; */
+  font-size: 26px;
 }
 .statics-label {
   font-weight: 400 !important;

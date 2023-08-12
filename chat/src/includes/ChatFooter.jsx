@@ -67,7 +67,7 @@ export default function ChatFooter({ socket, messageList, setMessageList, setIsT
       />
 
         <button className='btn btn-rounded' onClick={sendMessage}>
-          <MdSend />
+          <MdSend fill='#ffffff' width={'25px'} height='25px' />
         </button>
       </div>
       
