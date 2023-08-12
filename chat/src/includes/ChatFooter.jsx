@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import {Axios} from '../config';
-import { BsSend } from 'react-icons/bs';
 import { format } from 'date-fns';
+import {MdSend} from 'react-icons/md'
 
 export default function ChatFooter({ socket, messageList, setMessageList, setIsTyping, handleTyping, isOtherUserTyping, setIsOtherUserTyping, currentMessage, setCurrentMessage, token }) {
 
@@ -65,7 +65,7 @@ export default function ChatFooter({ socket, messageList, setMessageList, setIsT
       />
 
         <button className='btn btn-rounded' onClick={sendMessage}>
-          <BsSend />
+          <MdSend style={{position: 'relative', 'z-index': 99999}} />
         </button>
       </div>
       
