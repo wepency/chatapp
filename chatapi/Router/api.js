@@ -54,6 +54,27 @@ router.get('/chats', async (req, res) => {
     }
 });
 
+router.post('/chats', async (req, res) => {
+
+    try {
+        const response = await AxiosInstance.post(`/chats?receiver_id=${req.params.receiver_id}`, {
+            headers: {
+                Authorization: `${req.get('Authorization')}`,
+            },
+        });
+
+        // Extract the JSON data from the response
+        const data = response.data;
+
+        // Send the JSON data back to the client
+        res.json(data);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 router.post('/chats/:chatId/send_message', async (req, res) => {
 
     const chatId = req.params.chatId;
