@@ -9,6 +9,30 @@ const bodyParser = require('body-parser');
 var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
+router.get('/client/chats/:unitId/brief', async (req, res) => {
+
+    try {
+
+        const unitId = req.params.unitId;
+
+        const response = await AxiosInstance.get(`/client/chats/${unitId}/brief`, {
+            headers: {
+                Authorization: `${req.get('Authorization')}`,
+            },
+        });
+
+        // Extract the JSON data from the response
+        const data = response.data;
+
+        // Send the JSON data back to the client
+        res.json(data);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 router.get('/chats', async (req, res) => {
 
     try {
