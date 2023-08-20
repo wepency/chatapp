@@ -57,7 +57,7 @@ router.get('/chats', async (req, res) => {
 router.post('/chats', async (req, res) => {
 
     try {
-        const response = await AxiosInstance.post(`/chats?receiver_id=${req.params.receiver_id}`, {
+        const response = await AxiosInstance.post(`/chats?receiver_id=${req.query.receiver_id}`, {
             headers: {
                 Authorization: `${req.get('Authorization')}`,
             },
