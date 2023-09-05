@@ -1,21 +1,35 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import styles from './admin-chat.module.css'
 import {BsSearch} from 'react-icons/bs'
 import {FaCircle} from 'react-icons/fa'
 
+import Tabs from './includes/admin/Tabs';
+import ChatList from './includes/admin/ChatList';
+
 export default function AdminChat() {
+  const [activeTab, setActiveTab] = useState(1);
+
+  const changeTab = (tabNumber) => {
+    setActiveTab(tabNumber);
+  };
+
   return (
     <div>
         <div className={styles.container}>
     <div className={styles['people-list']} id="people-list">
+
       <div className={styles.search}>
         <input type="text" placeholder="search" />
         <BsSearch className={styles.search} />
       </div>
+
+    <Tabs activeTab={activeTab} changeTab={changeTab} />
+      <ChatList activeTab={activeTab} />
       
       <ul className={styles.list}>
         <li>
+
           <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt="avatar" />
           
           <div className={styles.about}>
@@ -31,7 +45,11 @@ export default function AdminChat() {
     
     <div className={styles.chat}>
       <div className={styles['chat-header']}>
-        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" />
+
+        <div className={styles['chat-images']}>
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" />
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" />
+        </div>
         
         <div className={styles['chat-about']}>
           <div className={styles['chat-with']}>Chat with Vincent Porter</div>
@@ -46,9 +64,9 @@ export default function AdminChat() {
           <li>
             <div className={styles['message-data align-right']}>
               <span className={styles['message-data-time']} >10:10 AM, Today</span> &nbsp; &nbsp;
-              <span className={styles['message-data-name']} >Olia</span> <FaCircle className='me' />
-              
+              <span className={styles['message-data-name']} >Olia</span> <FaCircle className='me' />  
             </div>
+
             <div className={`${styles.message} ${styles['other-message']} ${styles['float-right']}`}>
               Hi Vincent, how are you? How is the project coming along?
             </div>
